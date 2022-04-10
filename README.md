@@ -33,7 +33,7 @@ You must install the following package (to your project root directory) to use t
 npm install grunt load-grunt-tasks grunt-shell --save-dev
 ```
 
-> **NOTE:** Some systems need `sudo` to install an npm package, these packages are not very heavy in size but installing them may take some times.
+> **NOTE:** Some systems need `sudo` to install an npm package
 
 ### 📌 Plugins
 
