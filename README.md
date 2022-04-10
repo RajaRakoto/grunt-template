@@ -1,5 +1,9 @@
 <div align="center">
 
+<div align="center">
+<img src='https://github.com/RajaRakoto/github-docs/blob/master/grunt-template/grunt-logo.png?raw=true' width=120>
+</div>
+
 ### ██▓▒­░⡷⠂𝚐𝚛𝚞𝚗𝚝-𝚝𝚎𝚖𝚙𝚕𝚊𝚝𝚎⠐⢾░▒▓██
 
 <br>
