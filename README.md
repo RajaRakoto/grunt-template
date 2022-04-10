@@ -16,6 +16,11 @@ A **gruntfile.js** template for setting up a basic **GRUNT task runner** based e
 
 If you are not familiar with grunt yet, please visit the official site to learn more about how to use it before using this template -> https://gruntjs.com/
 
+**DEMO**
+<div align="center">
+<img src='https://github.com/RajaRakoto/github-docs/blob/master/grunt-template/grunt-demo.gif?raw=true'>
+</div>
+
 ### 📌 Installation
 
 - Clone `grunt-template` repository:
