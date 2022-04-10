@@ -14,6 +14,8 @@
 
 A **gruntfile.js** template for setting up a basic **GRUNT task runner** based environment to quickly integrate and use in a project
 
+If you are not familiar with grunt yet, please visit the official site to learn more about how to use it before using this template -> https://gruntjs.com/
+
 ### 📌 Installation
 
 - Clone `grunt-template` repository:
@@ -44,3 +46,5 @@ grunt shell:install_deps
 ```
 
 > **NOTE:** These packages are not very heavy in size but installing them may take some times.
+
+####`=> You now have a ready-to-use grunt environment, feel free to configure it and adapt it to your project if necessary`
