@@ -99,6 +99,6 @@ const basicsTaskStatus = [
 // now the function getTaskResume() takes care of updating the list of tasks ...
 ```
 
-####`=> You now have a ready-to-use grunt environment, feel free to configure it and adapt it to your project if necessary`
+#### `=> You now have a ready-to-use grunt environment, feel free to configure it and adapt it to your project if necessary`
 
 🅴🅽🅹🅾🆈 ❗
