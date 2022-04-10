@@ -47,4 +47,58 @@ grunt shell:install_deps
 
 > **NOTE:** These packages are not very heavy in size but installing them may take some times.
 
+### 📌 Tasks resumes
+
+I have implemented a `getTaskResume()` function which allows to list the executable tasks of this model
+
+This function can be called by just typing `grunt` in your console since I have set it as default task, then type `grunt <task_name>` to launch the task (Eg: `grunt compress-all`):
+
+**This model currently has 4 task categories:**
+
+- **basics tasks**: which performs only one task
+- **mixed tasks**: set of at least 2 tasks that run sequentially
+- **watched tasks**: tasks that run automatically when there is a change at the project level
+- **shell & others tasks**: commands or shell scripts to be executed from grunt or very rarely used tasks - here `compress-modules` is used to save all the packages found in node_modules
+
+<div align="center">
+<img src='https://github.com/RajaRakoto/github-docs/blob/master/grunt-template/grunt_task.png?raw=true'>
+</div>
+
+> **NOTE**: If a new contributor has just added a new plugin in this template, he must also update this list, here is an example of code to do so:
+
+Suppose the contributor adds the plugin `grunt-nodemon` which he has to put in `basics tasks` (all other categories of tasks are performed in the same way)
+
+```js
+// arrays basics tasks
+const basicsTaskNames = [
+	'concat-task',
+	'jshint-task',
+	'replace-task',
+	'imagemin-task',
+	'uglify-task',
+	'htmlmin-task',
+	'sass-task',
+	'babel-task',
+	'shell-task',
+	'nodemon-task', // <- add the task name here
+];
+
+const basicsTaskStatus = [
+	'concat:dev',
+	'jshint:dev',
+	'replace:dev',
+	'imagemin',
+	'uglify:dist',
+	'htmlmin:dist',
+	'sass:dist',
+	'babel:dist',
+	'shell:dev',
+	'nodemon:dev', // <- add the task status here
+];
+
+// now the function getTaskResume() takes care of updating the list of tasks ...
+```
+
 ####`=> You now have a ready-to-use grunt environment, feel free to configure it and adapt it to your project if necessary`
+
+🅴🅽🅹🅾🆈 ❗
