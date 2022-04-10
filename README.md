@@ -10,11 +10,11 @@
 
 </div>
 
-#### 📌 Description
+### 📌 Description
 
 A **gruntfile.js** template for setting up a basic **GRUNT task runner** based environment to quickly integrate and use in a project
 
-#### 📌 Installation
+### 📌 Installation
 
 - Clone `grunt-template` repository:
 
@@ -25,7 +25,7 @@ git clone --depth 1 https://github.com/RajaRakoto/grunt-template
 - Copy `gruntfile.js` to your project root directory
 - You can now delete the `grunt-template` folder if you no longer need it
 
-#### 📌 Requires
+### 📌 Requires
 
 You must install the following package (to your project root directory) to use this template:
 
@@ -35,7 +35,7 @@ npm install grunt load-grunt-tasks grunt-shell --save-dev
 
 > **NOTE:** Some systems need `sudo` to install an npm package, these packages are not very heavy in size but installing them may take some times.
 
-#### 📌 Plugins
+### 📌 Plugins
 
 Once the prerequisites are installed, you can now run the following command to install the base plugins:
 
