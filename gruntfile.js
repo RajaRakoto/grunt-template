@@ -34,7 +34,7 @@ module.exports = function (grunt) {
 		let tmp = [];
 		gruntPluginsNames.forEach(gruntPluginsNames => {
 			tmp.push(
-				`echo -e "\n[${gruntPluginsNames}] installation - please wait ..." && ` +
+				`echo -e "\n[${gruntPluginsNames}] installation - please wait ..." && sudo ` +
 					npmInstallPrefix +
 					gruntPluginsNames +
 					npmInstallMode,
