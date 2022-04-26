@@ -1,48 +1,17 @@
 /**
  * @author: Raja
- * @description: a gruntfile.js template for setting up a basic GRUNT task runner based environment to quickly integrate and use in a project
- * @requires: npm install grunt load-grunt-tasks grunt-shell --save-dev
- * @dependencies: grunt shell:install_deps
+ * @description: <grunt file description>
+ * @requires: <grunt packages lists>
  */
-module.exports = function (grunt) {
-	require('load-grunt-tasks')(grunt); // grunt plugins loader
+ module.exports = function (grunt) {
+	require('load-grunt-tasks')(grunt);
 
-	// all files destination
-	const sassDistDestination = './src/dist/styles/';
-	const imageDistDestination = './src/dist/images/';
+	// all files destination (example)
 	const backupsDestination = './backups/';
+	const sassDistDestination = './src/dist/';
 
 	// node-glob syntax
 	const includeAllFiles = ['**/*', '.*/**/*', '**/.*', '**/.*/**/*'];
-
-	// shell cmd script
-	const npmInstallPrefix = 'npm install ';
-	const npmInstallMode = ' --save-dev';
-	const gruntPluginsNames = [
-		'grunt-contrib-jshint',
-		'grunt-contrib-concat',
-		'grunt-contrib-uglify',
-		'grunt-contrib-sass',
-		'grunt-text-replace',
-		'grunt-contrib-htmlmin',
-		'grunt-contrib-compress ',
-		'grunt-contrib-watch',
-		'grunt-babel',
-		'grunt-contrib-imagemin',
-	];
-	function getGruntPluginsArray() {
-		let tmp = [];
-		gruntPluginsNames.forEach(gruntPluginsNames => {
-			tmp.push(
-				`echo -e "\n[${gruntPluginsNames}] installation - please wait ..." && sudo ` +
-					npmInstallPrefix +
-					gruntPluginsNames +
-					npmInstallMode,
-			);
-		});
-		return tmp;
-	}
-	const install_plugins_cmd = getGruntPluginsArray();
 
 	/**
 	 * ~ ALL GRUNT PLUGINS CONFIG ~
@@ -50,7 +19,6 @@ module.exports = function (grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('./package.json'),
 
-		// TODO: verified
 		/**
 		 * Conatenate files
 		 */
@@ -62,7 +30,6 @@ module.exports = function (grunt) {
 			},
 		},
 
-		// TODO: verified
 		/**
 		 * Validate js files
 		 */
@@ -74,7 +41,6 @@ module.exports = function (grunt) {
 			dev: ['./gruntfile.js', './src/index.js', './src/components/**/*.js'], // js files to verify
 		},
 
-		// TODO: verified
 		/**
 		 * Replace text in files using strings, regexs or functions.
 		 */
@@ -92,65 +58,13 @@ module.exports = function (grunt) {
 			},
 		},
 
-		// TODO: verified
-		/**
-		 * Minify & optimize all images
-		 */
-		imagemin: {
-			dynamic: {
-				files: [
-					{
-						expand: true,
-						cwd: './src/assets/images/', // img source
-						src: ['**/*.{png,jpg,gif,svg}'], // img extension
-						dest: imageDistDestination, // img destination
-					},
-				],
-			},
-		},
-
-		// TODO: verified
-		/**
-		 * Minify & optimize js files
-		 */
-		uglify: {
-			options: {
-				mangle: false, // variable minification
-			},
-			dist: {
-				files: {
-					// dest:src
-					'./src/components/editor/textTemplate.js':
-						'./src/components/editor/textTemplate.js',
-				},
-			},
-		},
-
-		// TODO: verified
-		/**
-		 * Minify HTML
-		 */
-		htmlmin: {
-			dist: {
-				options: {
-					removeComments: true,
-					collapseWhitespace: true,
-				},
-				files: {
-					// dest:src
-					'./public/index.html': './public/index.html',
-				},
-			},
-		},
-
-		// TODO: verified
 		/**
 		 * Compile sass to css
 		 */
 		sass: {
 			dist: {
 				options: {
-					style: 'compressed', // output style: compact, expanded, compressed
+					style: 'compressed',
 				},
 				files: [
 					// scss file list
@@ -166,7 +80,6 @@ module.exports = function (grunt) {
 			},
 		},
 
-		// TODO: verified
 		babel: {
 			// example
 			options: {
@@ -180,17 +93,15 @@ module.exports = function (grunt) {
 			},
 		},
 
-		// TODO: verified
 		/**
 		 * Run shell commands
 		 */
 		shell: {
-			install_deps: {
-				command: install_plugins_cmd.join('&&'),
+			test: {
+				command: ['echo ""'].join('&&'),
 			},
 		},
 
-		// TODO: verified
 		/**
 		 * Compress files and folders (incremental backup)
 		 */
@@ -202,7 +113,43 @@ module.exports = function (grunt) {
 				files: [{ src: ['./*', './.*'] }],
 				filter: 'isFile',
 			},
+			config: {
+				options: {
+					archive: backupsDestination + 'config.tar.gz',
+				},
+				expand: true,
+				cwd: './config/',
+				src: includeAllFiles,
+				dest: 'config',
+			},
+			docs: {
+				options: {
+					archive: backupsDestination + 'docs.tar.gz',
+				},
+				expand: true,
+				cwd: './docs/',
+				src: includeAllFiles,
+				dest: 'docs',
+			},
+			extension: {
+				options: {
+					archive: backupsDestination + 'extension.tar.gz',
+				},
+				expand: true,
+				cwd: './extension/',
+				src: includeAllFiles,
+				dest: 'extension',
+			},
 			modules: {
+				options: {
+					archive: backupsDestination + 'modules.tar.gz',
+				},
+				expand: true,
+				cwd: './modules/',
+				src: includeAllFiles,
+				dest: 'modules',
+			},
+			node_modules: {
 				options: {
 					archive: backupsDestination + 'node_modules.tar.gz',
 				},
@@ -210,6 +157,15 @@ module.exports = function (grunt) {
 				cwd: './node_modules/',
 				src: includeAllFiles,
 				dest: 'node_modules',
+			},
+			scripts: {
+				options: {
+					archive: backupsDestination + 'scripts.tar.gz',
+				},
+				expand: true,
+				cwd: './scripts/',
+				src: includeAllFiles,
+				dest: 'scripts',
 			},
 			src: {
 				options: {
@@ -219,6 +175,15 @@ module.exports = function (grunt) {
 				cwd: './src/',
 				src: includeAllFiles,
 				dest: 'src',
+			},
+			test: {
+				options: {
+					archive: backupsDestination + 'test.tar.gz',
+				},
+				expand: true,
+				cwd: './test/',
+				src: includeAllFiles,
+				dest: 'test',
 			},
 			public: {
 				options: {
@@ -231,78 +196,61 @@ module.exports = function (grunt) {
 			},
 		},
 
-		// TODO: verified
 		/**
 		 * Run predefined tasks whenever watched file patterns are added, changed or deleted
 		 */
 		watch: {
 			sass: {
-				files: ['./src/*.scss', './src/components/**/*.scss'], // src listening
+				files: ['*.scss'], // src listening
 				tasks: ['sass-task'], // default task to execute
 				options: { spawn: false }, // watch optimization
 			},
 		},
 	});
 
-	// grunt basics tasks
-	grunt.registerTask('concat-task', ['concat:dev']); // manual
-	grunt.registerTask('jshint-task', ['jshint:dev']); // manual
-	grunt.registerTask('replace-task', ['replace:dev']); // manual
-	grunt.registerTask('imagemin-task', ['imagemin']); // manual
-	grunt.registerTask('uglify-task', ['uglify:dist']); // manual
-	grunt.registerTask('htmlmin-task', ['htmlmin:dist']); // manual
-	grunt.registerTask('sass-task', ['sass:dist']); // watched
-	grunt.registerTask('babel-task', ['babel:dist']); // manual
-
-	// grunt mixed tasks
+	// all grunt register tasks
 	grunt.registerTask('compress-all', [
 		'compress:main',
-		'compress:public',
+		'compress:config',
+		'compress:docs',
+		'compress:extension',
+		'compress:modules',
+		'compress:node_modules',
+		'compress:scripts',
 		'compress:src',
+		'compress:test',
+		'compress:public',
 	]);
-
-	// grunt watched tasks
+	grunt.registerTask('concat-task', ['concat:dev']);
+	grunt.registerTask('jshint-task', ['jshint:dev']);
+	grunt.registerTask('replace-task', ['replace:dev']);
+	grunt.registerTask('sass-task', ['sass:dist']);
+	grunt.registerTask('shell-task', ['shell:test']);
+	grunt.registerTask('babel-task', ['babel:dist']);
 	grunt.registerTask('watch-sass', ['watch:sass']);
 
-	// grunt shell & others tasks
-	grunt.registerTask('compress-modules'), ['compress:modules'];
-	grunt.registerTask('grunt-deps', ['shell:install_deps']);
-
-	// arrays basics tasks
-	const basicsTaskNames = [
+	// all tasks lists
+	const myTasksNames = [
+		'compress-all',
 		'concat-task',
 		'jshint-task',
 		'replace-task',
-		'imagemin-task',
-		'uglify-task',
-		'htmlmin-task',
 		'sass-task',
 		'babel-task',
 		'shell-task',
-	];
-	const basicsTaskStatus = [
-		'concat:dev',
-		'jshint:dev',
-		'replace:dev',
-		'imagemin',
-		'uglify:dist',
-		'htmlmin:dist',
-		'sass:dist',
-		'babel:dist',
-		'shell:dev',
+		'watch-sass',
 	];
 
-	// arrays mixed tasks
-	const mixedTaskNames = ['compress-all'];
-	const mixedTaskStatus = ['(compress:main | compress:public | compress:src)'];
-
-	// arrays watched tasks
-	const watchedTaskNames = ['watch-sass'];
-	const watchedTaskStatus = ['watch:sass'];
-
-	// arrays others tasks
-	const othersTaskNames = ['compress-modules', 'grunt-deps'];
-	const othersTaskStatus = ['compress:modules', 'shell:install_deps'];
+	// tasks status (description)
+	const myTasksStatus = [
+		'compress: main | config | docs | extension | modules | node_modules | scripts | src | test | public',
+		'concatenate files',
+		'validate js files',
+		'replace text in files using strings, regexs or fuctions',
+		'compile sass to css',
+		'run shell commads',
+		'watch files change',
+	];
 
 	// default tasks
 	grunt.registerTask('default', () => {
@@ -350,15 +298,12 @@ module.exports = function (grunt) {
 			}
 		}
 
-		// all tasks resume
-		getTaskResume('basics tasks', basicsTaskNames, basicsTaskStatus, 'cyan');
-		getTaskResume('mixed tasks', mixedTaskNames, mixedTaskStatus, 'magenta');
-		getTaskResume('watched tasks', watchedTaskNames, watchedTaskStatus, 'blue');
+		// task resume
 		getTaskResume(
-			'shell & others tasks',
-			othersTaskNames,
-			othersTaskStatus,
-			'yellow',
+			'<TASK TITLE>',
+			myTasksNames,
+			myTasksStatus,
+			'yellow', // color theme
 		);
 	});
 };
